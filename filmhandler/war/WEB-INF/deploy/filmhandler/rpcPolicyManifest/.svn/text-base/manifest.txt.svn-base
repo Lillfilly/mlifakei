@@ -1,0 +1,4 @@
+# Module filmhandler
+# RPC service class, partial path of RPC policy file
+se.ixanon.filmhandler.client.services.FileListService, 7CE93971179A8DCDAD746CC843BDCA56.gwt.rpc
+se.ixanon.filmhandler.client.services.UploadProgressService, 77CBE17F715958A89F3727EF7E65BD84.gwt.rpc

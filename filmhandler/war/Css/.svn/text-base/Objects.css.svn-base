@@ -1,0 +1,47 @@
+@CHARSET "ISO-8859-1";
+
+.cellTable
+{
+	margin: 5px;
+	
+	border-style: solid;
+	border-width: thin;
+	border-color: #AAAAAA;
+}
+.gwt-Button, .gwt-FileUpload
+{
+	margin-left: 5px
+	!important;
+}
+
+/*
+The DELETE DIALOG BOX
+*/
+.deleteDialogButtonOK
+{
+	margin-left: 30% !important;
+}
+.deleteDialogButtonNO
+{
+	margin-left:55% !important;
+}
+/*
+END OF DELETE DIALOG BOX 
+
+The UPLOAD PROGRESS DIALOG
+*/
+.backPanel
+{
+	background-color: gray;
+	border-width: medium;
+	
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.frontPanel
+{
+	background-color: blue;
+}
+/*
+END OF UPLOAD PROGRESS DIALOG
+*/

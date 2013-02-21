@@ -1,0 +1,2 @@
+serviceClass: se.ixanon.filmhandler.client.services.UploadProgressService
+path: 77CBE17F715958A89F3727EF7E65BD84.gwt.rpc

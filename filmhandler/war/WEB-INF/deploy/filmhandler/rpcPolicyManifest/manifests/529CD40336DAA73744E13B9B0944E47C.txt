@@ -1,0 +1,2 @@
+serviceClass: se.ixanon.filmhandler.client.services.FileListService
+path: 7CE93971179A8DCDAD746CC843BDCA56.gwt.rpc

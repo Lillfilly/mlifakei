@@ -1,0 +1,32 @@
+@CHARSET "ISO-8859-1";
+
+html
+{
+	background-color: #EEEEEE;
+}
+body
+{
+	background-color: #EEEEEE
+	!important;
+	
+	text-align: center;
+}
+#Filmhanteraren
+{
+	background-color: #FFFFFF;
+	border-style: ridge;
+	
+	display:inline-block;
+	
+	padding: 15px;
+	margin-left: 16px;
+}
+#Filmhanteraren h1
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+	
+	color: #333333;
+	
+}
