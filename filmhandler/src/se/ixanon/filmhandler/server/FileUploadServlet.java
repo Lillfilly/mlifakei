@@ -21,7 +21,8 @@ import se.ixanon.filmhandler.server.objects.MyProgressListener;
 @SuppressWarnings("serial")
 public class FileUploadServlet extends HttpServlet {
 
-	private static final String UPLOAD_DIRECTORY = "/media";
+	//TODO Fix this path
+	private static final String UPLOAD_DIRECTORY = "filmer";
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException

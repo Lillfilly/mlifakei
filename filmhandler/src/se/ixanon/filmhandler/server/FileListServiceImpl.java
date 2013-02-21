@@ -12,7 +12,8 @@ import se.ixanon.filmhandler.shared.MovieItem;
 @SuppressWarnings("serial")
 public class FileListServiceImpl extends RemoteServiceServlet implements FileListService {
 
-	private File dir = new File("/media");
+	//TODO fix this URL. Filmer is not the proper target..
+	private File dir = new File("filmer");
 	
 	public ArrayList<MovieItem> getFiles()
 	{
