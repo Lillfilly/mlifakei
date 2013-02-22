@@ -6,7 +6,9 @@ import se.ixanon.filmhandler.shared.Channel;
 import se.ixanon.filmhandler.shared.MovieItem;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+@RemoteServiceRelativePath("channelservice")
 public interface ChannelService extends RemoteService {
 	
 	ArrayList<Channel> getChannels();

@@ -1,5 +1,6 @@
 package se.ixanon.filmhandler.client;
 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -27,6 +28,8 @@ public class Main implements EntryPoint {
 		tabPanel.add(new HTML("<h3>Video Config</h3>"), tabTitles[1]);
 		
 		tabPanel.selectTab(0);
+
+		//TODO add feature: Channel-settings   XML
 	}
 
 }
