@@ -32,10 +32,10 @@ import com.google.gwt.view.client.SelectionModel;
 
 public class FileList {
 	final ChannelServiceAsync channelService = GWT.create(ChannelService.class);
+	FileList me = this;
+	
 	final FileListServiceAsync fileservice = GWT.create(FileListService.class);
 	public ArrayList<MovieItem> cellFileList = new ArrayList<MovieItem>();
-	
-	FileList me = this;
 	
 	VerticalPanel vPanel = new VerticalPanel();
 	HorizontalPanel menuPanel = new HorizontalPanel();
@@ -49,7 +49,6 @@ public class FileList {
 			return item;
 		}	
 	});
-	
 	private ListDataProvider<MovieItem> cellDataProvider = new ListDataProvider<MovieItem>();
 	
 	private Timer updateTimer = new Timer() {
@@ -80,7 +79,7 @@ public class FileList {
 				
 				if(cellSelectionModel.isSelected(item))
 				{
-					deleteList.add(new MovieItem(item.getName(), item.getType(), false));
+					deleteList.add(new MovieItem(item.getName(), item.getType()));
 				}
 			}
 			
@@ -141,7 +140,7 @@ public class FileList {
 				
 				for (MovieItem item : result) 
 				{
-					cellFileList.add(new MovieItem(item.getName(),item.getType(), item.isConverted()));
+					cellFileList.add(new MovieItem(item.getName(),item.getType()));
 				}
 				
 				

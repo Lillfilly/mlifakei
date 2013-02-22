@@ -6,17 +6,14 @@ import java.io.Serializable;
 public class MovieItem implements Serializable {
 	private String m_name;
 	private String m_type;
-	private boolean m_converted;
 	
 	
-	public MovieItem(String name,String type, boolean converted) {
+	public MovieItem(String name,String type) {
 		m_name = name;
 		m_type = type;
-		m_converted = converted;
 	}
 	public MovieItem() {
 		m_name = "";
-		m_converted = false;
 	}
 
 	public String getName() {
@@ -34,13 +31,4 @@ public class MovieItem implements Serializable {
 	{
 		m_type = type;
 	}
-
-	public boolean isConverted() {
-		return m_converted;
-	}
-
-	public void setConverted(boolean converted) {
-		this.m_converted = converted;
-	}
-	
 }

@@ -36,7 +36,7 @@ public class FileListServiceImpl extends RemoteServiceServlet implements FileLis
 			String name = f.getName().substring(0,f.getName().lastIndexOf("."));
 			String type = f.getName().substring(f.getName().lastIndexOf("."));
 			
-			l.add(new MovieItem(name, type, false));
+			l.add(new MovieItem(name, type));
 		}
 		return l;
 	}
