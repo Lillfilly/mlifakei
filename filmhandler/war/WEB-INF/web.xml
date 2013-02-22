@@ -7,6 +7,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<!-- TODO: Add <servlet> tags for each servlet here. -->
 	<!-- TODO: Add <servlet-mapping> tags for each <servlet> here. -->
 	
+	<servlet>
+	    <servlet-name>channelservlet</servlet-name>
+	    <servlet-class>se.ixanon.filmhandler.server.ChannelServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>channelservlet</servlet-name>
+	    <url-pattern>/filmhandler/channelservice</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>fileservlet</servlet-name>
