@@ -15,18 +15,6 @@ public class MyCellTable extends CellTable<MovieItem> {
 			return item.getName();
 		}
 	};
-	private TextColumn<MovieItem> convertedCol = new TextColumn<MovieItem>() {
-
-		@Override
-		public String getValue(MovieItem item) {
-			
-			if(item.isConverted())
-			{
-				return "Converted";
-			}
-			return "Not converted";
-		}
-	};
 	private TextColumn<MovieItem> typeCol = new TextColumn<MovieItem>() {
 
 		@Override
@@ -38,11 +26,9 @@ public class MyCellTable extends CellTable<MovieItem> {
 	/*COLUMNS -------------------------------*/
 	
 	
-	
 	public MyCellTable() 
 	{
 		addColumn(nameCol);
 		addColumn(typeCol);
-		//addColumn(convertedCol);
 	}
 }

@@ -22,8 +22,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
-import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
-import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
 
 public class UploadDialog extends DialogBox {
 	
@@ -117,40 +115,6 @@ public class UploadDialog extends DialogBox {
 		formpanel.setMethod(FormPanel.METHOD_POST);
 		
 		
-		formpanel.addSubmitHandler(new SubmitHandler() {
-			
-			@Override
-			public void onSubmit(SubmitEvent event) {
-				// Fires just before the submit happens
-				
-				/*
-				changeToProgress();
-				getProgress();
-				btn_Close.setEnabled(false);
-				*/
-				/*
-				if(!fileUpload.getFilename().isEmpty())
-				{
-					if(fileUpload.getFilename().endsWith(".mp4") || fileUpload.getFilename().endsWith(".ts") || fileUpload.getFilename().endsWith(".txt"))
-					{
-						changeToProgress();
-						getProgress();
-						btn_Close.setEnabled(false);
-					}
-					else
-					{
-						Window.alert("You can only upload .mp4 and .ts files");
-						event.cancel();
-					}
-				}
-				else
-				{
-					Window.alert("No file selected");
-					event.cancel();
-				}
-				*/
-			}
-		});
 		formpanel.addSubmitCompleteHandler(new SubmitCompleteHandler() {
 			
 			@Override
@@ -164,8 +128,6 @@ public class UploadDialog extends DialogBox {
 		
 		setWidget(formpanel);
 	}
-	
-	
 	
 	private void getProgress() {
 		
@@ -205,8 +167,7 @@ public class UploadDialog extends DialogBox {
 		};
 		
 		t.scheduleRepeating(500);
-		t.run();
-		
+		t.run();	
 	}
 	private void changeToProgress()
 	{	
