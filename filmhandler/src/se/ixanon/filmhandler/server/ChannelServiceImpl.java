@@ -2,15 +2,21 @@ package se.ixanon.filmhandler.server;
 
 import java.util.ArrayList;
 
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 import se.ixanon.filmhandler.client.services.ChannelService;
 import se.ixanon.filmhandler.shared.Channel;
 import se.ixanon.filmhandler.shared.MovieItem;
 
-public class ChannelServiceImpl implements ChannelService {
-
+public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelService {
+	XmlReader xmlReader = new XmlReader();
+	
+	public void parseFile(String xml){
+		//xmlReader.parseFile(oath);
+	}
+	
 	@Override
 	public ArrayList<Channel> getChannels() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
