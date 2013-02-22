@@ -14,6 +14,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import se.ixanon.filmhandler.shared.Channel;
+
 public class XmlReader {
 	DocumentBuilderFactory factory;
 	DocumentBuilder builder;

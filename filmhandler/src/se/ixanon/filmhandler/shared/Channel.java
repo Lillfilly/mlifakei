@@ -1,4 +1,4 @@
-package se.ixanon.filmhandler.server;
+package se.ixanon.filmhandler.shared;
 import java.io.Serializable;
 
 //Contains information about each channel
