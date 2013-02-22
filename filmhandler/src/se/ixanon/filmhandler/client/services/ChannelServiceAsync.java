@@ -14,5 +14,6 @@ public interface ChannelServiceAsync {
 	void getVideos(AsyncCallback<ArrayList<MovieItem>> callback);
 	void deleteVideos(ArrayList<MovieItem> deleteList,
 			AsyncCallback<Void> callback);
+	void fileExists(String fileName, AsyncCallback<Boolean> callback);
 
 }

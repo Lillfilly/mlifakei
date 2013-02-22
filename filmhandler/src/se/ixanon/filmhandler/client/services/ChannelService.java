@@ -14,4 +14,6 @@ public interface ChannelService extends RemoteService {
 	
 	ArrayList<MovieItem> getVideos();
 	void deleteVideos(ArrayList<MovieItem> deleteList);
+	
+	boolean fileExists(String fileName);
 }

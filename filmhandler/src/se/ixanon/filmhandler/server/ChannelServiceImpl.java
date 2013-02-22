@@ -32,4 +32,10 @@ public class ChannelServiceImpl implements ChannelService {
 		
 	}
 
+	@Override
+	public boolean fileExists(String fileName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
