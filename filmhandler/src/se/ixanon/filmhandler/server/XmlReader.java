@@ -1,6 +1,7 @@
 package se.ixanon.filmhandler.server;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class XmlReader {
 	Document document;
 	
 	String videoDirectory;
-	HashMap<String, Channel> channels = new HashMap<>();
+	ArrayList<Channel> channels = new ArrayList<>();
 	
 	public XmlReader(){
 		factory = DocumentBuilderFactory.newInstance();
@@ -61,7 +62,7 @@ public class XmlReader {
 		Node vid = getNodeByName(root, "videoDirectory");
 		
 		if((new File(vid.getTextContent().replaceAll("\"", ""))).exists()){
-			videoDirectory = vid.getTextContent();
+			videoDirectory = vid.getTextContent().replaceAll("\"", "");
 		}else{
 			System.err.println("<videoDirectory> doesn't specify a valid path!");
 			return false;
@@ -94,7 +95,7 @@ public class XmlReader {
 				}else{
 					System.err.println("Kanalen " + chan.name + " innehåller inte en under tagg som heter 'streaming'!");
 				}
-				channels.put(chan.name, chan);
+				channels.add(chan);
 			}
 		}
 		return true;
@@ -139,21 +140,31 @@ public class XmlReader {
 	}
 	
 	public Channel getChannel(String name){
-		if(channels.containsKey(name)){
-			return channels.get(name);
+		for(int i = 0; i < channels.size(); i++){
+			if(channels.get(i).name == name){
+				return channels.get(i);
+			}
 		}
 		System.out.println("Kanalen " + name + " finns inte!");
 		return null;
+	}
+
+	public ArrayList<Channel> getChannels(){
+		return channels;
+	}
+	
+	public String getVideoDirectory(){
+		return videoDirectory;
 	}
 	
 	//Prints everything that's important
 	public void printChannelInformation(){
 		System.out.println("Video directory " + videoDirectory);
-		for(Map.Entry<String, Channel> k : channels.entrySet()){
-			if(k.getValue().streaming){
-				System.out.println("Channel " + k.getValue().name + " is currently streaming \"" + k.getValue().video + "\"");
+		for(int i = 0; i < channels.size(); i++){
+			if(channels.get(i).streaming){
+				System.out.println("Channel " + channels.get(i).name + " is currently streaming \"" + channels.get(i).video + "\"");
 			}else{
-				System.out.println("Channel " + k.getValue().name + " will stream \"" + k.getValue().video + "\" once it's turned on");
+				System.out.println("Channel " + channels.get(i).name + " will stream \"" + channels.get(i).video + "\" once it's turned on");
 			}
 		}
 	}

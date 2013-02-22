@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import se.ixanon.filmhandler.client.objects.DeleteFileDialog;
 import se.ixanon.filmhandler.client.objects.MyCellTable;
 import se.ixanon.filmhandler.client.objects.UploadDialog;
+import se.ixanon.filmhandler.client.services.ChannelService;
+import se.ixanon.filmhandler.client.services.ChannelServiceAsync;
 import se.ixanon.filmhandler.client.services.FileListService;
 import se.ixanon.filmhandler.client.services.FileListServiceAsync;
+import se.ixanon.filmhandler.server.ChannelServiceImpl;
 import se.ixanon.filmhandler.shared.MovieItem;
 
 import com.google.gwt.core.client.GWT;
@@ -16,6 +19,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -27,7 +31,7 @@ import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionModel;
 
 public class FileList {
-	
+	final ChannelServiceAsync channelService = GWT.create(ChannelService.class);
 	final FileListServiceAsync fileservice = GWT.create(FileListService.class);
 	public ArrayList<MovieItem> cellFileList = new ArrayList<MovieItem>();
 	
@@ -48,7 +52,6 @@ public class FileList {
 	
 	private ListDataProvider<MovieItem> cellDataProvider = new ListDataProvider<MovieItem>();
 	
-	
 	private Timer updateTimer = new Timer() {
 		
 		@Override
@@ -56,7 +59,6 @@ public class FileList {
 			updateFileList();
 		}
 	};
-	
 	
 	Button btn_Upload = new Button("Upload", new ClickHandler() {
 		
@@ -67,6 +69,7 @@ public class FileList {
 			ud.center();
 		}
 	});
+	
 	Button btn_Delete = new Button("Delete selected", new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
@@ -92,6 +95,13 @@ public class FileList {
 		}
 	});
 	
+	Button btn_Test = new Button("Test shit", new ClickHandler(){
+		@Override
+		public void onClick(ClickEvent event) {
+			updateChannelService();
+		}
+	});
+	
 	//Constructor
 	public FileList() {
 
@@ -99,6 +109,7 @@ public class FileList {
 		
 		menuPanel.add(btn_Upload);
 		menuPanel.add(btn_Delete);
+		menuPanel.add(btn_Test);
 		
 		updateTimer.scheduleRepeating(30 * 1000);
 		
@@ -112,8 +123,10 @@ public class FileList {
 		vPanel.add(menuPanel);
 		vPanel.add(cellTable);
 		vPanel.add(tipLabel);
-		
-		RootPanel.get("Filmhanteraren").add(vPanel);
+	}
+	
+	public VerticalPanel getWidget(){
+		return vPanel;
 	}
 	
 	public void updateFileList()
@@ -152,10 +165,47 @@ public class FileList {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Oops, Server error.");
+				Window.alert(caught.getMessage());
 			}
 		});
 	}
 	
-	
+	public void updateChannelService(){
+		channelService.fileExists("derp.mp4", new AsyncCallback<Boolean>(){
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				if(result){
+					DialogBox box = new DialogBox();
+					box.setText("File derp.mp4 exists!");
+					box.show();
+				}else{
+					DialogBox box = new DialogBox();
+					box.setText("File derp.mp4 doesn't exist! :(");
+					box.show();
+				}
+			}
+		});
+		
+		ArrayList<MovieItem> movies = new ArrayList<>();
+		MovieItem itm = new MovieItem();
+		itm.setName("derp");
+		itm.setType("mp4");
+		movies.add(itm);
+		channelService.deleteVideos(movies, new AsyncCallback<Void>() {
+			@Override
+			public void onSuccess(Void result) {
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+	}
 }
