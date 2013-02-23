@@ -1,9 +1,12 @@
 package se.ixanon.filmhandler.client.objects.channels;
 
+import se.ixanon.filmhandler.client.services.ChannelService;
+import se.ixanon.filmhandler.client.services.ChannelServiceAsync;
 import se.ixanon.filmhandler.shared.Channel;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.ValueUpdater;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.NativeEvent;
@@ -11,6 +14,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ToggleButtonCell extends AbstractCell<String>{
 	private static final SafeHtml pressedHtml = SafeHtmlUtils.fromSafeConstant("<button " +
@@ -18,20 +22,23 @@ public class ToggleButtonCell extends AbstractCell<String>{
 																			   "class=\"toggleButtonDown\" " +
 																			   "tabindex=\"-1\" " +
 																			   "aria-pressed=\"true\">" +
-																			   "<p style=\"color:green\">Streaming</p>" +
+																			   "<p style=\"color:green;font-size:12px\">On</p>" +
 																			   "</button>");
 	private static final SafeHtml upHtml = SafeHtmlUtils.fromSafeConstant("<button " +
 																		  "	type=\"button\" " +
 																		  "	class=\"toggleButtonUp\" " +
 																		  "	tabindex=\"-1\" " +
 																		  "	aria-pressed=\"false\">" +
-																		  "<p style=\"color:red;\">Offline</p>" +
+																		  "<p style=\"color:red;font-size:12px\">Off</p>" +
 																		  "</button>");
 	private static boolean pressed = false;
 	private Channel current = null;
+	private ChannelServiceAsync channelService = GWT.create(ChannelService.class);
 	
 	public ToggleButtonCell(){
 		super("click");
+		
+		
 	}
 	
 	public void setChannel(Channel t){
@@ -61,6 +68,17 @@ public class ToggleButtonCell extends AbstractCell<String>{
 			EventTarget eventTarget = event.getEventTarget();
 			if(parent.getFirstChildElement().isOrHasChild(Element.as(eventTarget))){
 				current.streaming = !current.streaming;
+				channelService.editChannel(current, new AsyncCallback<Void>() {
+					@Override
+					public void onSuccess(Void result) {
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert(caught.getMessage());
+					}
+				});
 			}
 		}
 		valueUpdater.update(value);
