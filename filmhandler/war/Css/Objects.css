@@ -48,9 +48,9 @@ END OF UPLOAD PROGRESS DIALOG
 
 .green
 {
-	color: green;
+	color: green !important;
 }
 .red
 {
-	color: red;
+	color: red !important;
 }

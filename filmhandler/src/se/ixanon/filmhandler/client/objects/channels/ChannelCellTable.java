@@ -35,12 +35,10 @@ public class ChannelCellTable extends CellTable<Channel> {
 		public String getValue(Channel c) {
 			if(c.streaming)
 			{
-				setCellStyleNames("green");
 				return "Streaming";
 			}
 			else
 			{
-				setCellStyleNames("red");
 				return "Offline";
 			}
 		}
@@ -56,8 +54,7 @@ public class ChannelCellTable extends CellTable<Channel> {
 	};
 	public ChannelCellTable() {
 		
-		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {
-			
+		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {	
 			@Override
 			public void update(int index, Channel object, String value) {
 				Window.alert("This is a secret message that only will appear if Oliver doesnt fail when trying to get the editbutton working!");

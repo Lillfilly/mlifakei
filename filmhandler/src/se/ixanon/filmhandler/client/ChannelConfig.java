@@ -17,9 +17,29 @@ public class ChannelConfig {
 	
 	public ChannelConfig() {
 		
+		Channel a = new Channel();
+		a.streaming = true;
+		
 		cs.add(new Channel());
+		cs.add(a);
+		cs.add(new Channel());
+		
 		ListDataProvider<Channel> l = new ListDataProvider<Channel>(cs);
 		l.addDataDisplay(table);
+		
+		int i = 0;
+		for(Channel c : cs)
+		{
+			if(c.streaming)
+			{
+				table.getRowElement(i).getCells().getItem(2).addClassName("green");
+			}
+			else
+			{
+				table.getRowElement(i).getCells().getItem(2).addClassName("red");
+			}
+			i++;
+		}
 		
 		vPanel.add(new HTML("<h1>Channel Configuration</h1>"));
 		vPanel.add(table);
