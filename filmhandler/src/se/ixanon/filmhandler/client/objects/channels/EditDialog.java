@@ -36,7 +36,7 @@ public class EditDialog extends DialogBox {
 	Button btn_Ok = new Button("Ok", new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-			c.name = videoList.getItemText(videoList.getSelectedIndex());
+			c.video = videoList.getItemText(videoList.getSelectedIndex());
 			channelService.editChannel(c,new AsyncCallback<Void>() {
 				@Override
 				public void onFailure(Throwable caught) {
