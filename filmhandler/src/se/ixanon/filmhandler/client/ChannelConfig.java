@@ -25,6 +25,11 @@ public class ChannelConfig {
 		
 		l.addDataDisplay(table);
 		
+		vPanel.add(new HTML("<h1>Channel Configuration</h1>"));
+		vPanel.add(table);
+	}
+	public void UpdateChannels()
+	{
 		channelService.getChannels(new AsyncCallback<ArrayList<Channel>>() {
 			@Override
 			public void onSuccess(ArrayList<Channel> result) {
@@ -35,9 +40,6 @@ public class ChannelConfig {
 			public void onFailure(Throwable caught) {
 			}
 		});
-		
-		vPanel.add(new HTML("<h1>Channel Configuration</h1>"));
-		vPanel.add(table);
 	}
 	public VerticalPanel getWidget()
 	{
