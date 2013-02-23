@@ -54,3 +54,20 @@ END OF UPLOAD PROGRESS DIALOG
 {
 	color: red !important;
 }
+
+/*
+ToggleButtonCell css
+*/
+.toggleButtonDown{
+	color:#00ff00;
+	background-color:#00ff00;
+	width:40px;
+	height:40px;
+}
+
+.toggleButtonUp{
+	color:#ff0000;
+	background-color:#ff0000;
+	width:40px;
+	height:40px;
+}

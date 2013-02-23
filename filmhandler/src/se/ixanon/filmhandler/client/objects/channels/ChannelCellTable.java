@@ -49,6 +49,14 @@ public class ChannelCellTable extends CellTable<Channel> {
 		}
 	};
 	
+	ToggleButtonCell toggleTest = new ToggleButtonCell();
+	Column<Channel, String> toggleCol = new Column<Channel, String>(toggleTest) {
+		@Override
+		public String getValue(Channel object) {
+			return "Toggle";
+		}
+	};
+	
 	public ChannelCellTable() {
 		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {	
 			@Override
@@ -63,6 +71,6 @@ public class ChannelCellTable extends CellTable<Channel> {
 		addColumn(videoCol);
 		addColumn(runningCol);
 		addColumn(editCol);
-	
+		addColumn(toggleCol);
 	}
 }
