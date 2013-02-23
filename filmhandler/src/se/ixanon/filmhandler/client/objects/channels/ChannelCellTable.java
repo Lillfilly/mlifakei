@@ -53,6 +53,7 @@ public class ChannelCellTable extends CellTable<Channel> {
 	Column<Channel, String> toggleCol = new Column<Channel, String>(toggleTest) {
 		@Override
 		public String getValue(Channel object) {
+			toggleTest.setChannel(object);
 			return object.name;
 		}
 	};
@@ -69,7 +70,6 @@ public class ChannelCellTable extends CellTable<Channel> {
 		toggleCol.setFieldUpdater(new FieldUpdater<Channel, String>(){
 			@Override
 			public void update(int index, Channel object, String value) {
-				System.out.println(object.name);
 				redraw();
 			}
 		});

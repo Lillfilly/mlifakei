@@ -1,5 +1,7 @@
 package se.ixanon.filmhandler.client.objects.channels;
 
+import se.ixanon.filmhandler.shared.Channel;
+
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.dom.client.Element;
@@ -26,8 +28,14 @@ public class ToggleButtonCell extends AbstractCell<String>{
 																		  "<p style=\"color:red;\">Offline</p>" +
 																		  "</button>");
 	private static boolean pressed = false;
+	private Channel current = null;
+	
 	public ToggleButtonCell(){
 		super("click");
+	}
+	
+	public void setChannel(Channel t){
+		current = t;
 	}
 	
 	@Override
@@ -35,10 +43,12 @@ public class ToggleButtonCell extends AbstractCell<String>{
 		if(value == null)
 			return;
 		
-		if(pressed == true){
-			sb.append(pressedHtml);
-		}else{
-			sb.append(upHtml);
+		if(current != null){
+			if(current.streaming == true){
+				sb.append(pressedHtml);
+			}else{
+				sb.append(upHtml);
+			}
 		}
 	}
 
@@ -50,7 +60,7 @@ public class ToggleButtonCell extends AbstractCell<String>{
 			//Ignore events that occur outside the element
 			EventTarget eventTarget = event.getEventTarget();
 			if(parent.getFirstChildElement().isOrHasChild(Element.as(eventTarget))){
-				pressed = !pressed;
+				current.streaming = !current.streaming;
 			}
 		}
 		valueUpdater.update(value);
