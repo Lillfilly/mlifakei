@@ -1,8 +1,6 @@
 package se.ixanon.filmhandler.client;
 
-
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 
@@ -14,22 +12,24 @@ public class Main implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		
-//		setupTabPanel();
-//		RootPanel.get("TabTest").add(tabPanel);
-		
-		//Add the Filehandlerthing
-		@SuppressWarnings("unused")
-		FileList fileList = new FileList();
-		RootPanel.get("Filmhanteraren").add(fileList.getWidget());
+		setupTabPanel();
+		RootPanel.get("Filmhanteraren").add(tabPanel);
+
+
 	}
 	private void setupTabPanel()
 	{
-		tabPanel.add(new HTML("Channel Configuration"), tabTitles[0]);
-		tabPanel.add(new HTML("<h3>Video Config</h3>"), tabTitles[1]);
+		tabPanel.setWidth("100%");
+		
+		ChannelConfig channelConfig = new ChannelConfig();
+		tabPanel.add(channelConfig.getWidget(), tabTitles[0]);
+		
+		@SuppressWarnings("unused")
+		FileList fileList = new FileList();
+		tabPanel.add(fileList.getWidget(), tabTitles[1]);
+		
 		
 		tabPanel.selectTab(0);
-
-		//TODO add feature: Channel-settings   XML
 	}
 
 }
