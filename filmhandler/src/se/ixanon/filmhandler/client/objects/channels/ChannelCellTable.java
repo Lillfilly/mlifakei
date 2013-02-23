@@ -55,6 +55,7 @@ public class ChannelCellTable extends CellTable<Channel> {
 			public void update(int index, Channel object, String value) {
 				Window.alert("This is a secret message that only will appear if Oliver doesnt fail when trying to get the editbutton working!");
 				EditDialog editDialog = new EditDialog(object);
+				editDialog.center();
 			}
 		});
 		
