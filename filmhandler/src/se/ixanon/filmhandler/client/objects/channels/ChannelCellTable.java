@@ -62,5 +62,6 @@ public class ChannelCellTable extends CellTable<Channel> {
 		addColumn(videoCol);
 		addColumn(runningCol);
 		addColumn(editCol);
+	
 	}
 }
