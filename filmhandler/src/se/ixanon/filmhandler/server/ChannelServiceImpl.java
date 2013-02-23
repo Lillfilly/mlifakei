@@ -21,18 +21,16 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 	public void buildXml(String path){
 		xmlReader.parseFile(path);
 		xmlReader.build();
-		xmlReader.printChannelInformation();
+		//xmlReader.printChannelInformation();
 	}
 	
 	@Override
 	public ArrayList<Channel> getChannels() {
-		//return xmlReader.get;
-		return null;
+		return xmlReader.getChannels();
 	}
 
 	@Override
 	public void editChannel(Channel editedChannel) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -45,13 +43,14 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 		String extension = "";
 		File dir = new File(videoDir);
 		for(File path : dir.listFiles()){
-			MovieItem mvi = new MovieItem();
-			mvi.setName(path.getName());
-	
 			extension = path.getName().substring(path.getName().lastIndexOf('.'));
-			mvi.setType(extension);
 			
-			movies.add(mvi);
+			if(extension.equals(".mp4") || extension.equals(".ts")){
+				MovieItem mvi = new MovieItem();
+				mvi.setName(path.getName().substring(0, path.getName().lastIndexOf('.')-1));
+				mvi.setType(extension);
+				movies.add(mvi);
+			}
 		}
 		return movies;
 	}
@@ -61,7 +60,7 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 		String videoDir = xmlReader.getVideoDirectory();
 		
 		for(MovieItem i : deleteList){
-			File f = new File(videoDir + "/" + i.getName());
+			File f = new File(videoDir + "/" + i.getName() + "." + i.getType());
 			
 			//Only attempt the removal if it acually exists
 			if(f.exists()){

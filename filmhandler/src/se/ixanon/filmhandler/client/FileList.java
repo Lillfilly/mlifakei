@@ -10,6 +10,7 @@ import se.ixanon.filmhandler.client.services.ChannelServiceAsync;
 import se.ixanon.filmhandler.client.services.FileListService;
 import se.ixanon.filmhandler.client.services.FileListServiceAsync;
 import se.ixanon.filmhandler.server.ChannelServiceImpl;
+import se.ixanon.filmhandler.shared.Channel;
 import se.ixanon.filmhandler.shared.MovieItem;
 
 import com.google.gwt.core.client.GWT;
@@ -103,7 +104,6 @@ public class FileList {
 	
 	//Constructor
 	public FileList() {
-
 		btn_Delete.setStyleName("FileListButton", true);
 		
 		menuPanel.add(btn_Upload);
@@ -138,27 +138,20 @@ public class FileList {
 				if (result == null)
 					return;
 				
-				for (MovieItem item : result) 
-				{
+				for (MovieItem item : result) {
 					cellFileList.add(new MovieItem(item.getName(),item.getType()));
 				}
 				
-				
-				if(!cellFileList.isEmpty())
-				{
+				if(!cellFileList.isEmpty()){
 					cellTable.setVisible(true);
 					btn_Delete.setVisible(true);
 					cellDataProvider.setList(cellFileList);
 					tipLabel.setText("Tip: You can select multiple objects by holding CTRL or SHIFT");
-					
-				
 				}
-				else
-				{
+				else{
 					cellTable.setVisible(false);
 					btn_Delete.setVisible(false);
 					tipLabel.setText("No videos have been uploaded yet");
-					
 				}
 			}
 
@@ -170,6 +163,9 @@ public class FileList {
 	}
 	
 	public void updateChannelService(){
+		/*
+		 * Implementation of the fileExists method
+		 */
 		channelService.fileExists("derp.mp4", new AsyncCallback<Boolean>(){
 			@Override
 			public void onFailure(Throwable caught) {
@@ -178,19 +174,14 @@ public class FileList {
 
 			@Override
 			public void onSuccess(Boolean result) {
-				if(result){
-					DialogBox box = new DialogBox();
-					box.setText("File derp.mp4 exists!");
-					box.show();
-				}else{
-					DialogBox box = new DialogBox();
-					box.setText("File derp.mp4 doesn't exist! :(");
-					box.show();
-				}
+				
 			}
 		});
 		
-		ArrayList<MovieItem> movies = new ArrayList<>();
+		/*
+		 * Implementation of the deleteVideos method
+		 */
+		ArrayList<MovieItem> movies = new ArrayList<MovieItem>();
 		MovieItem itm = new MovieItem();
 		itm.setName("derp");
 		itm.setType("mp4");
@@ -198,7 +189,40 @@ public class FileList {
 		channelService.deleteVideos(movies, new AsyncCallback<Void>() {
 			@Override
 			public void onSuccess(Void result) {
-				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+		
+		/*
+		 * Implementation of the getVideos method
+		 */
+		channelService.getVideos(new AsyncCallback<ArrayList<MovieItem>>() {
+			@Override
+			public void onSuccess(ArrayList<MovieItem> result) {
+				for(MovieItem i : result){
+					Window.alert(i.getName() + " " + i.getType());
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+		
+		/*
+		 * Implementation of the getChannels method
+		 */
+		channelService.getChannels(new AsyncCallback<ArrayList<Channel>>() {
+			@Override
+			public void onSuccess(ArrayList<Channel> result) {
+				for(Channel c : result){
+					Window.alert(c.name + " " + c.video + " " + c.streaming);
+				}
 			}
 			
 			@Override
