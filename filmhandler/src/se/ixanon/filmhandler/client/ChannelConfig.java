@@ -17,8 +17,6 @@ public class ChannelConfig {
 	
 	ChannelServiceAsync channelService = GWT.create(ChannelService.class);
 	
-//	ArrayList<Channel> cs = new ArrayList<Channel>();
-	
 	VerticalPanel vPanel = new VerticalPanel();
 	ChannelCellTable table = new ChannelCellTable();
 	ListDataProvider<Channel> l = new ListDataProvider<Channel>();
