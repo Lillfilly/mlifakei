@@ -1,5 +1,6 @@
 package se.ixanon.filmhandler.client.objects.channels;
 
+import se.ixanon.filmhandler.client.ChannelConfig;
 import se.ixanon.filmhandler.shared.Channel;
 
 import com.google.gwt.cell.client.ButtonCell;
@@ -27,20 +28,6 @@ public class ChannelCellTable extends CellTable<Channel> {
 		}
 	};
 	
-	private TextColumn<Channel> runningCol = new TextColumn<Channel>() {
-		@Override
-		public String getValue(Channel c) {
-			if(c.streaming)
-			{
-				return "Streaming";
-			}
-			else
-			{
-				return "Offline";
-			}
-		}
-	};
-	
 	ButtonCell editButton = new ButtonCell();
 	Column<Channel, String> editCol = new Column<Channel, String>(editButton) {
 		@Override
@@ -58,11 +45,11 @@ public class ChannelCellTable extends CellTable<Channel> {
 		}
 	};
 	
-	public ChannelCellTable() {
+	public ChannelCellTable(final ChannelConfig config) {
 		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {	
 			@Override
 			public void update(int index, Channel object, String value) {			
-				EditDialog editDialog = new EditDialog(object, index);
+				EditDialog editDialog = new EditDialog(object, index, config);
 				editDialog.center();
 			}
 		});
@@ -76,7 +63,6 @@ public class ChannelCellTable extends CellTable<Channel> {
 		
 		addColumn(nameCol);
 		addColumn(videoCol);
-		addColumn(runningCol);
 		addColumn(editCol);
 		addColumn(toggleCol);
 	}
