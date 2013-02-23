@@ -57,8 +57,8 @@ public class DeleteFileDialog extends DialogBox {
 			}
 		});
 		
-		btn_OK.setStyleName("deleteDialogButtonOK", true);
-		btn_NO.setStyleName("deleteDialogButtonNO", true);
+		btn_OK.setStyleName("DeleteDialog_DialogButtonOK", true);
+		btn_NO.setStyleName("DeleteDialog_DialogButtonNO", true);
 		
 		buttonPanel.add(btn_OK);
 		buttonPanel.add(btn_NO);
