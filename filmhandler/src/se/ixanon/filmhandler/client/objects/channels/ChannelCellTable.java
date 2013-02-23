@@ -60,8 +60,7 @@ public class ChannelCellTable extends CellTable<Channel> {
 	public ChannelCellTable() {
 		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {	
 			@Override
-			public void update(int index, Channel object, String value) {
-				Window.alert("This is a secret message that only will appear if Oliver doesnt fail when trying to get the editbutton working!");
+			public void update(int index, Channel object, String value) {			
 				EditDialog editDialog = new EditDialog(object, index);
 				editDialog.center();
 			}
