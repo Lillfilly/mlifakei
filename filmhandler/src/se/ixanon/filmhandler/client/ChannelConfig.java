@@ -25,6 +25,8 @@ public class ChannelConfig {
 		
 		l.addDataDisplay(table);
 		
+		UpdateChannels();
+		
 		vPanel.add(new HTML("<h1>Channel Configuration</h1>"));
 		vPanel.add(table);
 	}
