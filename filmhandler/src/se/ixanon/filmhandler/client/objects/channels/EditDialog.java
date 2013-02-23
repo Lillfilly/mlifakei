@@ -2,6 +2,7 @@ package se.ixanon.filmhandler.client.objects.channels;
 
 import java.util.ArrayList;
 
+import se.ixanon.filmhandler.client.ChannelConfig;
 import se.ixanon.filmhandler.client.services.ChannelService;
 import se.ixanon.filmhandler.client.services.ChannelServiceAsync;
 import se.ixanon.filmhandler.shared.Channel;
@@ -22,6 +23,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class EditDialog extends DialogBox {
 	
 	ChannelServiceAsync channelService = GWT.create(ChannelService.class);
+	
+	ChannelConfig p;
+	Channel c;
+	
 	VerticalPanel vPanel = new VerticalPanel();
 	
 	HTML header = new HTML();
@@ -31,7 +36,17 @@ public class EditDialog extends DialogBox {
 	Button btn_Ok = new Button("Ok", new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-			Window.alert("Nope!");
+			channelService.editChannel(c,new AsyncCallback<Void>() {
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("ChannelEdit failed");
+				}
+				@Override
+				public void onSuccess(Void result) {
+					p.UpdateChannels();
+					hide();
+				}
+			});
 		}
 	});
 	Button btn_Close = new Button("Cancel", new ClickHandler() {
@@ -41,7 +56,10 @@ public class EditDialog extends DialogBox {
 		}
 	});
 	
-	public EditDialog(final Channel channelToBeEdited, int index) {
+	public EditDialog(final Channel channelToBeEdited, int index, ChannelConfig parent) {
+		
+		c = channelToBeEdited;
+		p = parent;
 		
 		vPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
 		
@@ -50,17 +68,20 @@ public class EditDialog extends DialogBox {
 		
 		btn_Close.setStyleName("EditDialog_DialogButtonNo", true);
 		
-		header.setHTML("<h3>Edit channel</h3> " + channelToBeEdited.name);
+		header.setHTML("<h3>Edit channel</h3> " + c.name);
 		buttonPanel.add(btn_Ok);
 		buttonPanel.add(btn_Close);
 		
 		videoList.addItem("Loading videos...");
 		videoList.setEnabled(false);
+		btn_Ok.setEnabled(false);
+		
 		channelService.getVideos(new AsyncCallback<ArrayList<MovieItem>>() {
 			@Override
 			public void onSuccess(ArrayList<MovieItem> result) {
 				videoList.clear();
 				videoList.setEnabled(true);
+				btn_Ok.setEnabled(true);
 				for (MovieItem m : result) {
 					videoList.addItem(m.getName() + m.getType());
 				}
