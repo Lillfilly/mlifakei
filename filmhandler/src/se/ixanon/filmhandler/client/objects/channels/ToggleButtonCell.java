@@ -17,16 +17,20 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ToggleButtonCell extends AbstractCell<String>{
-	private static final SafeHtml pressedHtml = SafeHtmlUtils.fromSafeConstant("<button " +
-																			   "type=\"button\" " +
-																			   "aria-pressed=\"true\">" +
-																			   "<p style=\"color:green;font-size:12px\">On</p>" +
-																			   "</button>");
-	private static final SafeHtml upHtml = SafeHtmlUtils.fromSafeConstant("<button " +
-																		  "	type=\"button\" " +
-																		  "	aria-pressed=\"false\">" +
-																		  "<p style=\"color:red;font-size:12px\">Off</p>" +
-																		  "</button>");
+	private static final SafeHtml pressedHtml = SafeHtmlUtils.fromSafeConstant("<input " +
+																			   "class=\"gwt-Button\" " +
+																			   "type=\"submit\" " +
+																			   "value=\"On\" " +
+																			   "style=\"color:green\" " +
+																			   "aria-pressed=\"true\"> " +
+																			   "</input>");
+	private static final SafeHtml upHtml = SafeHtmlUtils.fromSafeConstant("<input " +
+																		  "class=\"gwt-Button\" " +
+																		  "type=\"submit\" " +
+																		  "value=\"Off\" " +
+																		  "style=\"color:red\" " +
+																		  "aria-pressed=\"false\">" +
+																		  "</input>");
 	private Channel current = null;
 	private ChannelServiceAsync channelService = GWT.create(ChannelService.class);
 	
