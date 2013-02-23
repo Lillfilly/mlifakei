@@ -91,20 +91,12 @@ public class VideoList {
 		}
 	});
 	
-	Button btn_Test = new Button("Test shit", new ClickHandler(){
-		@Override
-		public void onClick(ClickEvent event) {
-			updateChannelService();
-		}
-	});
-	
 	//Constructor
 	public VideoList() {
 		btn_Delete.setStyleName("FileListButton", true);
 		
 		menuPanel.add(btn_Upload);
 		menuPanel.add(btn_Delete);
-		menuPanel.add(btn_Test);
 		
 		updateTimer.scheduleRepeating(30 * 1000);
 		
