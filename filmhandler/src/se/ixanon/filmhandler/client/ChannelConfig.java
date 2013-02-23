@@ -32,11 +32,11 @@ public class ChannelConfig {
 		{
 			if(c.streaming)
 			{
-				table.getRowElement(i).getCells().getItem(2).addClassName("green");
+				table.getRowElement(i).getCells().getItem(2).setClassName("green");
 			}
 			else
 			{
-				table.getRowElement(i).getCells().getItem(2).addClassName("red");
+				table.getRowElement(i).getCells().getItem(2).setClassName("red");
 			}
 			i++;
 		}
