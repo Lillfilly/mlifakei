@@ -56,7 +56,7 @@ public class EditDialog extends DialogBox {
 		}
 	});
 	
-	public EditDialog(final Channel channelToBeEdited, int index, ChannelConfig parent) {
+	public EditDialog(Channel channelToBeEdited, int index, ChannelConfig parent) {
 		
 		c = channelToBeEdited;
 		p = parent;
