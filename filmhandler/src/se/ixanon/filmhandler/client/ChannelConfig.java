@@ -36,6 +36,8 @@ public class ChannelConfig {
 		
 		UpdateChannels();
 		
+		table.setStyleName("cellTable", true);
+		
 		vPanel.add(new HTML("<h1>Channel Configuration</h1>"));
 		vPanel.add(table);
 	}
