@@ -73,8 +73,8 @@ public class XmlReader {
 		Node channelsNode = getNodeByName(root, "channels");
 		Node vid = getNodeByName(root, "videoDirectory");
 		
-		if((new File(vid.getTextContent().replaceAll("\"", ""))).exists()){
-			videoDirectory = vid.getTextContent().replaceAll("\"", "");
+		if((new File(vid.getTextContent())).exists()){
+			videoDirectory = vid.getTextContent();
 		}else{
 			System.err.println("<videoDirectory> doesn't specify a valid path!");
 			return false;
@@ -91,14 +91,14 @@ public class XmlReader {
 				
 				//Looks for a child node called 'film' - this node needs to include the currently picked film
 				if((temp = getNodeByName(chanNode.getChildNodes(), "video")) != null){
-					chan.video = temp.getTextContent().replaceAll("\"", "");
+					chan.video = temp.getTextContent();
 				}else{
 					System.err.println("Kanalen " + chan.name + " innehåller inte en under tagg som heter 'video'!");
 				}
 				
 				//Looks for a child node called 'streaming' - this node needs to tell wether the channel is streaming or not
 				if((temp = getNodeByName(chanNode.getChildNodes(), "streaming")) != null){
-					chan.streaming = Boolean.parseBoolean(temp.getTextContent().replaceAll("\"", ""));
+					chan.streaming = Boolean.parseBoolean(temp.getTextContent());
 					
 					//Makes note of the fact that all information hasn't been given by the user
 					if(temp.getTextContent().length() == 0){
@@ -209,10 +209,10 @@ public class XmlReader {
 				Node streaming = getNodeByName(thisChannel.getChildNodes(), "streaming");
 				
 				if(video != null){
-					video.setTextContent("\"" + toEdit.video + "\"");
+					video.setTextContent(toEdit.video);
 				}
 				if(streaming != null){
-					streaming.setTextContent("\"" + String.valueOf(toEdit.streaming) + "\"");
+					streaming.setTextContent(String.valueOf(toEdit.streaming));
 				}
 				
 				//Save the changes to the xml file
