@@ -31,7 +31,7 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 
 	@Override
 	public void editChannel(Channel editedChannel) {
-		
+		xmlReader.editChannel(editedChannel);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 			
 			if(extension.equals(".mp4") || extension.equals(".ts")){
 				MovieItem mvi = new MovieItem();
-				mvi.setName(path.getName().substring(0, path.getName().lastIndexOf('.')-1));
+				mvi.setName(path.getName().substring(0, path.getName().lastIndexOf('.')));
 				mvi.setType(extension);
 				movies.add(mvi);
 			}

@@ -199,9 +199,7 @@ public class VideoList {
 		channelService.getVideos(new AsyncCallback<ArrayList<MovieItem>>() {
 			@Override
 			public void onSuccess(ArrayList<MovieItem> result) {
-				for(MovieItem i : result){
-					Window.alert(i.getName() + " " + i.getType());
-				}
+				
 			}
 			
 			@Override
@@ -216,9 +214,26 @@ public class VideoList {
 		channelService.getChannels(new AsyncCallback<ArrayList<Channel>>() {
 			@Override
 			public void onSuccess(ArrayList<Channel> result) {
-				for(Channel c : result){
-					Window.alert(c.name + " " + c.video + " " + c.streaming);
-				}
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+		
+		/*
+		 * Implementation of the editChannel method
+		 */
+		Channel toedit = new Channel();
+		toedit.name = "channel1";
+		toedit.streaming = true;
+		toedit.video = "gtfo.mp4";
+		channelService.editChannel(toedit, new AsyncCallback<Void>() {
+			@Override
+			public void onSuccess(Void result) {
+				
 			}
 			
 			@Override

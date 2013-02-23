@@ -9,6 +9,12 @@ import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -18,18 +24,26 @@ import org.xml.sax.SAXException;
 import se.ixanon.filmhandler.shared.Channel;
 
 public class XmlReader {
-	DocumentBuilderFactory factory;
+	//For reading the file
+	DocumentBuilderFactory documentFactory;
 	DocumentBuilder builder;
+	
+	//For writing to the file
+	TransformerFactory transformerFactory;
+	Transformer transformer;
+	
 	Document document;
 	
 	String videoDirectory;
 	ArrayList<Channel> channels = new ArrayList<>();
 	
 	public XmlReader(){
-		factory = DocumentBuilderFactory.newInstance();
+		documentFactory = DocumentBuilderFactory.newInstance();
+		transformerFactory = TransformerFactory.newInstance();
 		try {
-			builder = factory.newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
+			builder = documentFactory.newDocumentBuilder();
+			transformer = transformerFactory.newTransformer();
+		} catch (ParserConfigurationException | TransformerConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
@@ -155,6 +169,66 @@ public class XmlReader {
 	
 	public String getVideoDirectory(){
 		return videoDirectory;
+	}
+	
+	public void editChannel(Channel chan){
+		Channel toEdit = null;
+		
+		for(int i = 0; i < channels.size(); i++){
+			if(chan.name.equals(channels.get(i).name)){
+				toEdit = channels.get(i);
+				break;
+			}
+		}
+		
+		if(toEdit != null){
+			toEdit.streaming = chan.streaming;
+			toEdit.video = chan.video;
+			
+			//Change the node that is associated with the channel
+			NodeList root = document.getElementsByTagName("config");
+			Node channels = getNodeByName(root, "channels");
+			Node thisChannel = null;
+			
+			//Find the right channel
+			Node temp = null;
+			for(int i = 0; i < channels.getChildNodes().getLength(); i++){
+				temp = channels.getChildNodes().item(i);
+				if(temp.hasAttributes()){
+					//Look through each channels attributes for a 'name' attribute
+					for(int j = 0; j < temp.getAttributes().getLength(); j++){
+						if(temp.getAttributes().item(j).getNodeName() == "name"){
+							if(temp.getAttributes().item(j).getNodeValue().equals(toEdit.name)){
+								thisChannel = temp;
+								break;
+							}
+						}
+					}
+				}
+			}
+			if(thisChannel != null){
+				Node video = getNodeByName(thisChannel.getChildNodes(), "video");
+				Node streaming = getNodeByName(thisChannel.getChildNodes(), "streaming");
+				
+				if(video != null){
+					video.setTextContent("\"" + toEdit.video + "\"");
+				}
+				if(streaming != null){
+					streaming.setTextContent("\"" + String.valueOf(toEdit.streaming) + "\"");
+				}
+				
+				//Save the changes to the xml file
+				DOMSource source = new DOMSource(document);
+				StreamResult result = new StreamResult(new File("./config.xml"));
+				try {
+					transformer.transform(source, result);
+				} catch (TransformerException e) {
+					e.printStackTrace();
+				}
+			}else{
+				System.out.println("Kunde inte hitta en kanal med namn " + toEdit.name);
+			}
+		}
 	}
 	
 	//Prints everything that's important
