@@ -8,14 +8,13 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Image;
 
 public class ChannelCellTable extends CellTable<Channel> {
 
 	private TextColumn<Channel> nameCol = new TextColumn<Channel>() {
-
 		@Override
 		public String getValue(Channel channel) {
-			// TODO Auto-generated method stub
 			return channel.name;
 		}
 	};
@@ -24,13 +23,11 @@ public class ChannelCellTable extends CellTable<Channel> {
 
 		@Override
 		public String getValue(Channel channel) {
-			// TODO Auto-generated method stub
 			return channel.video;
 		}
 	};
 	
 	private TextColumn<Channel> runningCol = new TextColumn<Channel>() {
-
 		@Override
 		public String getValue(Channel c) {
 			if(c.streaming)
@@ -46,19 +43,18 @@ public class ChannelCellTable extends CellTable<Channel> {
 	
 	ButtonCell editButton = new ButtonCell();
 	Column<Channel, String> editCol = new Column<Channel, String>(editButton) {
-
 		@Override
 		public String getValue(Channel object) {
 			return "Edit";
 		}
 	};
+	
 	public ChannelCellTable() {
-		
 		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {	
 			@Override
 			public void update(int index, Channel object, String value) {
 				Window.alert("This is a secret message that only will appear if Oliver doesnt fail when trying to get the editbutton working!");
-				
+				EditDialog editDialog = new EditDialog(object);
 			}
 		});
 		
