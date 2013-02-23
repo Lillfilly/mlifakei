@@ -3,7 +3,7 @@ package se.ixanon.filmhandler.client.objects;
 
 import java.util.ArrayList;
 
-import se.ixanon.filmhandler.client.FileList;
+import se.ixanon.filmhandler.client.VideoList;
 import se.ixanon.filmhandler.client.services.FileListService;
 import se.ixanon.filmhandler.client.services.FileListServiceAsync;
 import se.ixanon.filmhandler.shared.MovieItem;
@@ -26,7 +26,7 @@ public class DeleteFileDialog extends DialogBox {
 	VerticalPanel vPanel = new VerticalPanel();
 	HorizontalPanel buttonPanel = new HorizontalPanel();
 	
-	public DeleteFileDialog(final ArrayList<MovieItem> deleteList, final FileList parent) {
+	public DeleteFileDialog(final ArrayList<MovieItem> deleteList, final VideoList parent) {
 		
 		Button btn_OK = new Button("Delete", new ClickHandler() {
 			
@@ -42,7 +42,7 @@ public class DeleteFileDialog extends DialogBox {
 
 					@Override
 					public void onSuccess(Void result) {
-						parent.updateFileList();
+						parent.updateVideoList();
 					}
 				});
 				

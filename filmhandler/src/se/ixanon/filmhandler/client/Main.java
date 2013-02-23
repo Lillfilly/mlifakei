@@ -13,7 +13,7 @@ public class Main implements EntryPoint {
 	public void onModuleLoad() {
 		
 		setupTabPanel();
-		RootPanel.get("Filmhanteraren").add(tabPanel);
+		RootPanel.get("ConfigHolder").add(tabPanel);
 
 
 	}
@@ -25,7 +25,7 @@ public class Main implements EntryPoint {
 		tabPanel.add(channelConfig.getWidget(), tabTitles[0]);
 		
 		@SuppressWarnings("unused")
-		FileList fileList = new FileList();
+		VideoList fileList = new VideoList();
 		tabPanel.add(fileList.getWidget(), tabTitles[1]);
 		
 		

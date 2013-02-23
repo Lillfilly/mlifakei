@@ -45,3 +45,12 @@ The UPLOAD PROGRESS DIALOG
 /*
 END OF UPLOAD PROGRESS DIALOG
 */
+
+.green
+{
+	color: green;
+}
+.red
+{
+	color: red;
+}

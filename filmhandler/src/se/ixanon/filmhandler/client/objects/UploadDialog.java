@@ -1,6 +1,6 @@
 package se.ixanon.filmhandler.client.objects;
 
-import se.ixanon.filmhandler.client.FileList;
+import se.ixanon.filmhandler.client.VideoList;
 import se.ixanon.filmhandler.client.services.FileListService;
 import se.ixanon.filmhandler.client.services.FileListServiceAsync;
 import se.ixanon.filmhandler.client.services.UploadProgressService;
@@ -93,7 +93,7 @@ public class UploadDialog extends DialogBox {
 		}
 	});
 	
-	public UploadDialog(final FileList parent) {
+	public UploadDialog(final VideoList parent) {
 		
 		btn_Submit.setStyleName("deleteDialogButtonOK", true);
 		btn_Close.setStyleName("deleteDialogButtonNO", true);
@@ -122,7 +122,7 @@ public class UploadDialog extends DialogBox {
 				//Window.alert(event.getResults());
 				SubmitComplete();
 				
-				parent.updateFileList();
+				parent.updateVideoList();
 			}
 		});
 		

@@ -9,7 +9,6 @@ import se.ixanon.filmhandler.client.services.ChannelService;
 import se.ixanon.filmhandler.client.services.ChannelServiceAsync;
 import se.ixanon.filmhandler.client.services.FileListService;
 import se.ixanon.filmhandler.client.services.FileListServiceAsync;
-import se.ixanon.filmhandler.server.ChannelServiceImpl;
 import se.ixanon.filmhandler.shared.Channel;
 import se.ixanon.filmhandler.shared.MovieItem;
 
@@ -20,22 +19,19 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionModel;
 
-public class FileList {
-	final ChannelServiceAsync channelService = GWT.create(ChannelService.class);
-	FileList me = this;
+public class VideoList {
+	VideoList me = this;
 	
-	final FileListServiceAsync fileservice = GWT.create(FileListService.class);
+	final ChannelServiceAsync channelService = GWT.create(ChannelService.class);
 	public ArrayList<MovieItem> cellFileList = new ArrayList<MovieItem>();
 	
 	VerticalPanel vPanel = new VerticalPanel();
@@ -56,7 +52,7 @@ public class FileList {
 		
 		@Override
 		public void run() {
-			updateFileList();
+			updateVideoList();
 		}
 	};
 	
@@ -90,7 +86,7 @@ public class FileList {
 				DeleteFileDialog deleteDialog = new DeleteFileDialog(deleteList, me);
 				deleteDialog.center();
 				
-				updateFileList();
+				updateVideoList();
 			}
 		}
 	});
@@ -103,7 +99,7 @@ public class FileList {
 	});
 	
 	//Constructor
-	public FileList() {
+	public VideoList() {
 		btn_Delete.setStyleName("FileListButton", true);
 		
 		menuPanel.add(btn_Upload);
@@ -116,7 +112,7 @@ public class FileList {
 		cellTable.setSelectionModel(cellSelectionModel);
 		cellDataProvider.addDataDisplay(cellTable);
 		
-		updateFileList();
+		updateVideoList();
 		
 		vPanel.add(new HTML("<h1>Available videos</h1>"));
 		vPanel.add(menuPanel);
@@ -128,10 +124,10 @@ public class FileList {
 		return vPanel;
 	}
 	
-	public void updateFileList()
+	public void updateVideoList()
 	{
 		cellFileList.clear();
-		fileservice.getFiles(new AsyncCallback<ArrayList<MovieItem>>() {
+		channelService.getVideos(new AsyncCallback<ArrayList<MovieItem>>() {
 
 			@Override
 			public void onSuccess(ArrayList<MovieItem> result) {

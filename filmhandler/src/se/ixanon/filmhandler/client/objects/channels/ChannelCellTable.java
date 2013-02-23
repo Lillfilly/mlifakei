@@ -29,6 +29,23 @@ public class ChannelCellTable extends CellTable<Channel> {
 		}
 	};
 	
+	private TextColumn<Channel> runningCol = new TextColumn<Channel>() {
+
+		@Override
+		public String getValue(Channel c) {
+			if(c.streaming)
+			{
+				setCellStyleNames("green");
+				return "Streaming";
+			}
+			else
+			{
+				setCellStyleNames("red");
+				return "Offline";
+			}
+		}
+	};
+	
 	ButtonCell editButton = new ButtonCell();
 	Column<Channel, String> editCol = new Column<Channel, String>(editButton) {
 
@@ -38,8 +55,7 @@ public class ChannelCellTable extends CellTable<Channel> {
 		}
 	};
 	public ChannelCellTable() {
-		addColumn(nameCol);
-		addColumn(videoCol);
+		
 		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {
 			
 			@Override
@@ -48,6 +64,10 @@ public class ChannelCellTable extends CellTable<Channel> {
 				
 			}
 		});
+		
+		addColumn(nameCol);
+		addColumn(videoCol);
+		addColumn(runningCol);
 		addColumn(editCol);
 	}
 }

@@ -11,7 +11,7 @@ body
 	
 	text-align: center;
 }
-#Filmhanteraren
+#ConfigHolder
 {
 	background-color: #FFFFFF;
 	min-width: 400px;
@@ -19,7 +19,7 @@ body
 	display:inline-block;
 	margin-left: 16px;
 }
-#Filmhanteraren h1
+#ConfigHolder h1
 {
 	margin-top: 0px;
 	margin-bottom: 0px;
