@@ -73,10 +73,10 @@ public class XmlReader {
 		Node channelsNode = getNodeByName(root, "channels");
 		Node vid = getNodeByName(root, "videoDirectory");
 		
-		if((new File(vid.getTextContent())).exists()){
+		if((new File(vid.getTextContent())).isDirectory()){
 			videoDirectory = vid.getTextContent();
 		}else{
-			System.err.println("<videoDirectory> doesn't specify a valid path!");
+			JOptionPane.showMessageDialog(null,"<videoDirectory> ger ingen giltig sökväg! Måste ange en sökväg till en mapp!");
 			return false;
 		}
 		
@@ -93,7 +93,7 @@ public class XmlReader {
 				if((temp = getNodeByName(chanNode.getChildNodes(), "video")) != null){
 					chan.video = temp.getTextContent();
 				}else{
-					System.err.println("Kanalen " + chan.name + " innehåller inte en under tagg som heter 'video'!");
+					JOptionPane.showMessageDialog(null,"Kanalen " + chan.name + " innehåller inte en under tagg som heter 'video'!");
 				}
 				
 				//Looks for a child node called 'streaming' - this node needs to tell wether the channel is streaming or not
@@ -102,10 +102,10 @@ public class XmlReader {
 					
 					//Makes note of the fact that all information hasn't been given by the user
 					if(temp.getTextContent().length() == 0){
-						System.err.println("Varning kanalen " + chan.name + "s 'streaming' tagg innehåller varken \"true\" eller \"false\", sätts till \"false\" som standard.");
+						JOptionPane.showMessageDialog(null,"Varning kanalen " + chan.name + "s 'streaming' tagg innehåller varken \"true\" eller \"false\", sätts till \"false\" som standard.");
 					}
 				}else{
-					System.err.println("Kanalen " + chan.name + " innehåller inte en under tagg som heter 'streaming'!");
+					JOptionPane.showMessageDialog(null,"Kanalen " + chan.name + " innehåller inte en under tagg som heter 'streaming'!");
 				}
 				channels.add(chan);
 			}
@@ -122,11 +122,11 @@ public class XmlReader {
 				}
 			}
 		}else{
-			System.err.println("Node doesn't contain an attribute called " + name);
+			JOptionPane.showMessageDialog(null,"Xml attributen " + name + " hittades inte!");
 			return "'??'";
 		}
 		
-		System.err.println("Node doesn't contain an attribute called " + name);
+		JOptionPane.showMessageDialog(null,"Xml attributen " + name + " hittades inte!");
 		return "'??'";
 	}
 	
@@ -225,18 +225,6 @@ public class XmlReader {
 				}
 			}else{
 				System.out.println("Kunde inte hitta en kanal med namn " + toEdit.name);
-			}
-		}
-	}
-	
-	//Prints everything that's important
-	public void printChannelInformation(){
-		System.out.println("Video directory " + videoDirectory);
-		for(int i = 0; i < channels.size(); i++){
-			if(channels.get(i).streaming){
-				System.out.println("Channel " + channels.get(i).name + " is currently streaming \"" + channels.get(i).video + "\"");
-			}else{
-				System.out.println("Channel " + channels.get(i).name + " will stream \"" + channels.get(i).video + "\" once it's turned on");
 			}
 		}
 	}

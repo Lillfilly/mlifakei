@@ -21,7 +21,6 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 	public void buildXml(String path){
 		xmlReader.parseFile(path);
 		xmlReader.build();
-		//xmlReader.printChannelInformation();
 	}
 	
 	@Override
@@ -66,7 +65,7 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 			if(f.exists()){
 				//If it failed to delete, print an error message
 				if(f.delete() == false){
-					System.err.println("Kunde inte ta bort filmen " + videoDir + "/" + i.getName());
+					JOptionPane.showMessageDialog(null, "Kunde inte ta bort filmen " + videoDir + "/" + i.getName());
 				}
 			}
 		}
