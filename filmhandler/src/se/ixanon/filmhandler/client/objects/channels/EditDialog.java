@@ -36,7 +36,14 @@ public class EditDialog extends DialogBox {
 	Button btn_Ok = new Button("Ok", new ClickHandler() {
 		@Override
 		public void onClick(ClickEvent event) {
-			c.video = videoList.getItemText(videoList.getSelectedIndex());
+			if(videoList.getSelectedIndex() == 0)
+			{
+				c.video = "";
+			}
+			else
+			{
+				c.video = videoList.getItemText(videoList.getSelectedIndex());
+			}
 			channelService.editChannel(c,new AsyncCallback<Void>() {
 				@Override
 				public void onFailure(Throwable caught) {
@@ -81,11 +88,14 @@ public class EditDialog extends DialogBox {
 			@Override
 			public void onSuccess(ArrayList<MovieItem> result) {
 				videoList.clear();
-				videoList.setEnabled(true);
-				btn_Ok.setEnabled(true);
+				
+				videoList.addItem("No video");
 				for (MovieItem m : result) {
 					videoList.addItem(m.getName() + m.getType());
 				}
+				
+				videoList.setEnabled(true);
+				btn_Ok.setEnabled(true);
 			}
 			@Override
 			public void onFailure(Throwable caught) {

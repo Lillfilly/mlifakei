@@ -46,6 +46,7 @@ public class ChannelConfig {
 		channelService.getChannels(new AsyncCallback<ArrayList<Channel>>() {
 			@Override
 			public void onSuccess(ArrayList<Channel> result) {
+				
 				l.setList(result);
 			}
 			

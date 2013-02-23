@@ -93,8 +93,6 @@ public class VideoList {
 	
 	//Constructor
 	public VideoList() {
-		btn_Delete.setStyleName("FileListButton", true);
-		
 		menuPanel.add(btn_Upload);
 		menuPanel.add(btn_Delete);
 		
