@@ -8,6 +8,7 @@ import se.ixanon.filmhandler.client.services.ChannelServiceAsync;
 import se.ixanon.filmhandler.shared.Channel;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -21,8 +22,16 @@ public class ChannelConfig {
 	ChannelCellTable table = new ChannelCellTable(this);
 	ListDataProvider<Channel> l = new ListDataProvider<Channel>();
 	
-	public ChannelConfig() {
+	private Timer updateTimer = new Timer() {
 		
+		@Override
+		public void run() {
+			UpdateChannels();
+		}
+	};
+	
+	public ChannelConfig() {
+		updateTimer.scheduleRepeating(30 * 1000);
 		l.addDataDisplay(table);
 		
 		UpdateChannels();
