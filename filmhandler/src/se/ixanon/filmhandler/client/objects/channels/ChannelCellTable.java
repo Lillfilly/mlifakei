@@ -66,6 +66,13 @@ public class ChannelCellTable extends CellTable<Channel> {
 			}
 		});
 		
+		toggleCol.setFieldUpdater(new FieldUpdater<Channel, String>(){
+			@Override
+			public void update(int index, Channel object, String value) {
+				redraw();
+			}
+		});
+		
 		addColumn(nameCol);
 		addColumn(videoCol);
 		addColumn(runningCol);
