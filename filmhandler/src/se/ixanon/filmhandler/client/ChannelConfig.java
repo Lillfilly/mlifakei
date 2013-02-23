@@ -19,10 +19,16 @@ public class ChannelConfig {
 		
 		Channel a = new Channel();
 		a.streaming = true;
+		a.name = "bert";
 		
-		cs.add(new Channel());
+		Channel xx = new Channel();
+		xx.name = "robin";
+		
+		Channel yy = new Channel();
+		yy.name = "bob";
+		cs.add(xx);
 		cs.add(a);
-		cs.add(new Channel());
+		cs.add(yy);
 		
 		ListDataProvider<Channel> l = new ListDataProvider<Channel>(cs);
 		l.addDataDisplay(table);
