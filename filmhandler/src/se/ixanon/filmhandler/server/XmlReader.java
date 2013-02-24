@@ -49,7 +49,7 @@ public class XmlReader {
 	public boolean parseFile(String path){
 		File file = new File(path);
 		if(file.exists() == false){
-			JOptionPane.showMessageDialog(null, "Filen kunde inte hittas: " + path);
+			JOptionPane.showMessageDialog(null, "File " + path + " could not be found.");
 			return false;
 		}
 		try {
@@ -76,7 +76,7 @@ public class XmlReader {
 		if((new File(vid.getTextContent())).isDirectory()){
 			videoDirectory = vid.getTextContent();
 		}else{
-			JOptionPane.showMessageDialog(null,"<videoDirectory> ger ingen giltig sökväg! Måste ange en sökväg till en mapp!");
+			JOptionPane.showMessageDialog(null,"<videoDirectory> doesn't point to a valid directory path.");
 			return false;
 		}
 		
@@ -93,7 +93,7 @@ public class XmlReader {
 				if((temp = getNodeByName(chanNode.getChildNodes(), "video")) != null){
 					chan.video = temp.getTextContent();
 				}else{
-					JOptionPane.showMessageDialog(null,"Kanalen " + chan.name + " innehåller inte en under tagg som heter 'video'!");
+					JOptionPane.showMessageDialog(null,"Channel " + chan.name + " doesn't contain a 'video' tag!");
 				}
 				
 				//Looks for a child node called 'streaming' - this node needs to tell wether the channel is streaming or not
@@ -102,10 +102,10 @@ public class XmlReader {
 					
 					//Makes note of the fact that all information hasn't been given by the user
 					if(temp.getTextContent().length() == 0){
-						JOptionPane.showMessageDialog(null,"Varning kanalen " + chan.name + "s 'streaming' tagg innehåller varken \"true\" eller \"false\", sätts till \"false\" som standard.");
+						JOptionPane.showMessageDialog(null,"Warning channel " + chan.name + "s 'streaming' doesn't contain either 'true' or 'false', set to 'false' by default.");
 					}
 				}else{
-					JOptionPane.showMessageDialog(null,"Kanalen " + chan.name + " innehåller inte en under tagg som heter 'streaming'!");
+					JOptionPane.showMessageDialog(null,"Channel " + chan.name + " doesn't contain a 'streaming' tag!");
 				}
 				channels.add(chan);
 			}
@@ -122,11 +122,11 @@ public class XmlReader {
 				}
 			}
 		}else{
-			JOptionPane.showMessageDialog(null,"Xml attributen " + name + " hittades inte!");
+			JOptionPane.showMessageDialog(null,"Couldn't find a XML attribute called " + name);
 			return "'??'";
 		}
 		
-		JOptionPane.showMessageDialog(null,"Xml attributen " + name + " hittades inte!");
+		JOptionPane.showMessageDialog(null,"Couldn't find a XML attribute called " + name);
 		return "'??'";
 	}
 	
@@ -157,7 +157,7 @@ public class XmlReader {
 				return channels.get(i);
 			}
 		}
-		System.out.println("Kanalen " + name + " finns inte!");
+		System.out.println("Channel " + name + " doesn't exist!");
 		return null;
 	}
 
@@ -224,7 +224,7 @@ public class XmlReader {
 					e.printStackTrace();
 				}
 			}else{
-				System.out.println("Kunde inte hitta en kanal med namn " + toEdit.name);
+				System.out.println("Couldn't find a channel with the name " + toEdit.name);
 			}
 		}
 	}

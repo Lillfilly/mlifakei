@@ -65,7 +65,7 @@ public class ChannelServiceImpl extends RemoteServiceServlet implements ChannelS
 			if(f.exists()){
 				//If it failed to delete, print an error message
 				if(f.delete() == false){
-					JOptionPane.showMessageDialog(null, "Kunde inte ta bort filmen " + videoDir + "/" + i.getName());
+					JOptionPane.showMessageDialog(null, "Couldn't remove " + videoDir + "/" + i.getName());
 				}
 			}
 		}
