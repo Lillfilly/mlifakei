@@ -11,6 +11,7 @@ import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.client.Window;
 
 public class EditButtonCell extends AbstractCell<String> {
 
@@ -51,6 +52,5 @@ public class EditButtonCell extends AbstractCell<String> {
 				dialog.center();
 			}
 		}
-		valueUpdater.update(value);
 	}
 }

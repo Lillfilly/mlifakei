@@ -21,15 +21,13 @@ public class ToggleButtonCell extends AbstractCell<String>{
 																			   "class=\"gwt-Button\" " +
 																			   "type=\"submit\" " +
 																			   "value=\"On\" " +
-																			   "style=\"color:green\" " +
-																			   "aria-pressed=\"true\"> " +
+																			   "style=\"color:green\"> " +
 																			   "</input>");
 	private static final SafeHtml upHtml = SafeHtmlUtils.fromSafeConstant("<input " +
 																		  "class=\"gwt-Button\" " +
 																		  "type=\"submit\" " +
 																		  "value=\"Off\" " +
-																		  "style=\"color:red\" " +
-																		  "aria-pressed=\"false\">" +
+																		  "style=\"color:red\">" +
 																		  "</input>");
 	private Channel current = null;
 	private ChannelServiceAsync channelService = GWT.create(ChannelService.class);

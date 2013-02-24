@@ -147,7 +147,19 @@ public class XmlReader {
 				}
 			}
 		}
+		return null;
+	}
+	
+	/**
+	 * Returns the content of a tag. <tag>content</tag>
+	 */
+	public String getTagContentByName(String name){
+		NodeList parent = document.getChildNodes();
+		Node n = getNodeByName(parent, name);
 		
+		if(n != null){
+			return n.getTextContent();
+		}
 		return null;
 	}
 	

@@ -35,7 +35,7 @@ public class ChannelCellTable extends CellTable<Channel> {
 		@Override
 		public String getValue(Channel object) {
 			editButton.setup(object, config);
-			return null;
+			return "";
 		}
 	};
 	

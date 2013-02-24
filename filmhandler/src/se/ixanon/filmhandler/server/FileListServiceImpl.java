@@ -17,8 +17,7 @@ public class FileListServiceImpl extends RemoteServiceServlet implements FileLis
 	public FileListServiceImpl() {
 		XmlReader xmlReader = new XmlReader();
 		xmlReader.parseFile("./config.xml");
-		xmlReader.build();
-		dir = new File(xmlReader.getVideoDirectory());
+		dir = new File(xmlReader.getTagContentByName("videoDirectory"));
 	}
 	
 	public ArrayList<MovieItem> getFiles()

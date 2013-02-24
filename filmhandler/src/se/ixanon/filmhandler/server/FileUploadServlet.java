@@ -37,8 +37,7 @@ public class FileUploadServlet extends HttpServlet {
 		{
 			XmlReader xmlReader = new XmlReader();
 			xmlReader.parseFile("./config.xml");
-			xmlReader.build();
-			uploadDirectory = xmlReader.getVideoDirectory();
+			uploadDirectory = xmlReader.getTagContentByName("videoDirectory");
 			
 			FileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
