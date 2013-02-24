@@ -13,6 +13,8 @@ import com.google.gwt.user.client.ui.Image;
 
 public class ChannelCellTable extends CellTable<Channel> {
 
+	ChannelConfig config;
+	
 	private TextColumn<Channel> nameCol = new TextColumn<Channel>() {
 		@Override
 		public String getValue(Channel channel) {
@@ -28,11 +30,12 @@ public class ChannelCellTable extends CellTable<Channel> {
 		}
 	};
 	
-	ButtonCell editButton = new ButtonCell();
+	EditButtonCell editButton = new EditButtonCell();
 	Column<Channel, String> editCol = new Column<Channel, String>(editButton) {
 		@Override
 		public String getValue(Channel object) {
-			return "Edit";
+			editButton.setup(object, config);
+			return null;
 		}
 	};
 	
@@ -46,13 +49,8 @@ public class ChannelCellTable extends CellTable<Channel> {
 	};
 	
 	public ChannelCellTable(final ChannelConfig config) {
-		editCol.setFieldUpdater(new FieldUpdater<Channel, String>() {	
-			@Override
-			public void update(int index, Channel object, String value) {			
-				EditDialog editDialog = new EditDialog(object, index, config);
-				editDialog.center();
-			}
-		});
+		
+		this.config = config;
 		
 		toggleCol.setFieldUpdater(new FieldUpdater<Channel, String>(){
 			@Override
