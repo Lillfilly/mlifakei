@@ -12,8 +12,14 @@ import se.ixanon.filmhandler.shared.MovieItem;
 @SuppressWarnings("serial")
 public class FileListServiceImpl extends RemoteServiceServlet implements FileListService {
 
-	//TODO fix this URL. Filmer is not the proper target..
-	private File dir = new File("filmer");
+	private File dir;
+	
+	public FileListServiceImpl() {
+		XmlReader xmlReader = new XmlReader();
+		xmlReader.parseFile("./config.xml");
+		xmlReader.build();
+		dir = new File(xmlReader.getVideoDirectory());
+	}
 	
 	public ArrayList<MovieItem> getFiles()
 	{

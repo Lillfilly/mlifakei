@@ -21,8 +21,7 @@ import se.ixanon.filmhandler.server.objects.MyProgressListener;
 @SuppressWarnings("serial")
 public class FileUploadServlet extends HttpServlet {
 
-	//TODO Fix this path
-	private static final String UPLOAD_DIRECTORY = "filmer";
+	private String uploadDirectory = "";
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
@@ -36,6 +35,11 @@ public class FileUploadServlet extends HttpServlet {
 	{
 		if(ServletFileUpload.isMultipartContent(req))
 		{
+			XmlReader xmlReader = new XmlReader();
+			xmlReader.parseFile("./config.xml");
+			xmlReader.build();
+			uploadDirectory = xmlReader.getVideoDirectory();
+			
 			FileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			
@@ -63,7 +67,7 @@ public class FileUploadServlet extends HttpServlet {
 						fileName = FilenameUtils.getName(fileName);
 					}
 					
-					File uploadedFile = new File(UPLOAD_DIRECTORY, fileName);
+					File uploadedFile = new File(uploadDirectory, fileName);
 					if (uploadedFile.createNewFile())
 					{
 						item.write(uploadedFile);

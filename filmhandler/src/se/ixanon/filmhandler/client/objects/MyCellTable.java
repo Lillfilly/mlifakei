@@ -11,7 +11,6 @@ public class MyCellTable extends CellTable<MovieItem> {
 
 		@Override
 		public String getValue(MovieItem item) {
-			// TODO Auto-generated method stub
 			return item.getName();
 		}
 	};
